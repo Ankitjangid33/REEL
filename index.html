@@ -320,9 +320,14 @@
         togglePlayPause();
       });
 
-      // Click anywhere on the whole screen to play/pause
-      videoControlsOverlay.addEventListener("click", function (e) {
-        if (e.target === videoControlsOverlay) {
+      // Click anywhere on the reel container to play/pause
+      const reelContainer = document.querySelector(".reel");
+      reelContainer.addEventListener("click", function (e) {
+        // Don't trigger if clicking on action buttons or follow button
+        const isActionBtn = e.target.closest(".action-btn");
+        const isFollowBtn = e.target.closest(".follow-btn");
+
+        if (!isActionBtn && !isFollowBtn) {
           togglePlayPause();
         }
       });
