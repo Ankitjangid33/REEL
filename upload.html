@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover"
+    />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <title>Upload Reel - Instagram Reels</title>
+    <link rel="stylesheet" href="upload-styles.css" />
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <h1 class="logo">📹 Upload Reel</h1>
+            <a href="index.html" class="back-btn">← Back to Reels</a>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <main class="upload-container">
+        <div class="upload-content">
+            <!-- Upload Area -->
+            <div class="upload-area" id="uploadArea">
+                <div class="upload-icon">📹</div>
+                <h2>Upload Your Reel</h2>
+                <p>Drag and drop your video here or click to select</p>
+                <input
+                    type="file"
+                    id="videoInput"
+                    accept="video/*"
+                    class="video-input"
+                />
+                <button class="upload-btn" id="selectFileBtn">Choose Video</button>
+                <p class="file-info">Max size: 100MB • Supported: MP4, WebM, OGG</p>
+            </div>
+
+            <!-- Upload Progress -->
+            <div class="progress-section" id="progressSection" style="display: none;">
+                <h3>Uploading...</h3>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill"></div>
+                </div>
+                <p class="progress-text" id="progressText">0%</p>
+            </div>
+
+            <!-- Video Details Form -->
+            <div class="details-section" id="detailsSection" style="display: none;">
+                <h3>Video Details</h3>
+                <div class="preview-container">
+                    <video id="videoPreview" class="video-preview" controls></video>
+                </div>
+
+                <form id="detailsForm" class="details-form">
+                    <div class="form-group">
+                        <label for="username">Username</label>
+                        <input
+                            type="text"
+                            id="username"
+                            placeholder="Your username"
+                            required
+                        />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="description">Description</label>
+                        <textarea
+                            id="description"
+                            placeholder="Add a description for your reel..."
+                            rows="3"
+                        ></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="audioTitle">Audio/Music Title</label>
+                        <input
+                            type="text"
+                            id="audioTitle"
+                            placeholder="Name of the audio/music"
+                        />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="avatarColor">Avatar Color</label>
+                        <div class="color-picker">
+                            <input type="color" id="avatarColor" value="#667eea" />
+                            <input type="color" id="avatarColor2" value="#764ba2" />
+                        </div>
+                        <p class="color-info">Choose gradient colors for avatar</p>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="button" class="cancel-btn" id="cancelBtn">Cancel</button>
+                        <button type="submit" class="submit-btn">Upload Reel</button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Success Message -->
+            <div class="success-section" id="successSection" style="display: none;">
+                <div class="success-icon">✅</div>
+                <h3>Reel Uploaded Successfully!</h3>
+                <p>Your reel has been added to the gallery.</p>
+                <div class="success-actions">
+                    <a href="index.html" class="view-btn">View Your Reel</a>
+                    <button id="uploadAnotherBtn" class="upload-another-btn">Upload Another</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>&copy; 2024 Instagram Reels Clone. All rights reserved.</p>
+    </footer>
+
+    <script src="upload-script.js"></script>
+</body>
+</html>
