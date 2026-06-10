@@ -16,10 +16,18 @@
       <!-- Reel 1 -->
       <div class="reel">
         <div class="reel-video">
-          <video id="reel-video" class="video-player" playsinline loop controls>
+          <video id="reel-video" class="video-player" playsinline loop>
             <source src="video-viral.mp4" type="video/mp4" />
             Your browser does not support the video tag.
           </video>
+          <!-- Play/Pause Overlay Button -->
+          <div class="video-controls-overlay" id="videoControlsOverlay">
+            <button class="play-pause-btn" id="playPauseBtn">
+              <svg viewBox="0 0 24 24" fill="white">
+                <polygon points="5 3 19 12 5 21 5 3"></polygon>
+              </svg>
+            </button>
+          </div>
         </div>
 
         <div class="reel-overlay">
@@ -198,6 +206,8 @@
       const likeBtn = document.getElementById("like-btn");
       const likeCountSpan = document.getElementById("like-count");
       const soundBtn = document.getElementById("sound-btn");
+      const playPauseBtn = document.getElementById("playPauseBtn");
+      const videoControlsOverlay = document.getElementById("videoControlsOverlay");
 
       // Initial like count
       const INITIAL_LIKES = 125000;
@@ -241,6 +251,15 @@
         }
       }
 
+      // Update play/pause button
+      function updatePlayPauseBtn() {
+        if (video.paused) {
+          playPauseBtn.innerHTML = '<svg viewBox="0 0 24 24" fill="white"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>';
+        } else {
+          playPauseBtn.innerHTML = '<svg viewBox="0 0 24 24" fill="white"><rect x="6" y="4" width="4" height="16"></rect><rect x="14" y="4" width="4" height="16"></rect></svg>';
+        }
+      }
+
       // Initialize on page load
       updateLikeUI();
       updateSoundUI();
@@ -256,14 +275,38 @@
         console.log("Autoplay prevented:", err);
       });
 
-      // Toggle play/pause on video click
+      // Update button when video plays/pauses
+      video.addEventListener("play", updatePlayPauseBtn);
+      video.addEventListener("pause", updatePlayPauseBtn);
+
+      // Hide play button when video is playing
+      video.addEventListener("play", () => {
+        videoControlsOverlay.style.opacity = "0";
+        videoControlsOverlay.style.pointerEvents = "none";
+      });
+
+      // Show play button when video is paused
+      video.addEventListener("pause", () => {
+        videoControlsOverlay.style.opacity = "1";
+        videoControlsOverlay.style.pointerEvents = "all";
+      });
+
+      // Play/Pause button click
+      playPauseBtn.addEventListener("click", function (e) {
+        e.stopPropagation();
+        if (video.paused) {
+          video.play();
+        } else {
+          video.pause();
+        }
+      });
+
+      // Click on video to play/pause
       video.addEventListener("click", function (e) {
-        if (e.target.tagName !== "BUTTON") {
-          if (video.paused) {
-            video.play();
-          } else {
-            video.pause();
-          }
+        if (video.paused) {
+          video.play();
+        } else {
+          video.pause();
         }
       });
 
@@ -320,6 +363,9 @@
           }, 200);
         }
       });
+
+      // Initialize play/pause button state
+      updatePlayPauseBtn();
     </script>
   </body>
 </html>
