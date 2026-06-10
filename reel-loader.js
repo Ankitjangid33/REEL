@@ -1,58 +1,59 @@
 // Reel Loader Script - Handles dynamic loading of reels
-const reelsContainer = document.getElementById('reelsContainer');
-const homeBtn = document.getElementById('homeBtn');
+const reelsContainer = document.getElementById("reelsContainer");
+const homeBtn = document.getElementById("homeBtn");
 
 // Sample reel data (default reel)
 const defaultReel = {
-    id: 1,
-    username: '@madanrathore_fanclub',
-    description: 'Uploaded by Madan Rathore Fan Club 🔥 #madanrathore #fanclub #viral',
-    audioTitle: 'Original Audio - Madan Rathore Fan Club',
-    videoUrl: 'your-video.mp4',
-    avatarColor1: '#667eea',
-    avatarColor2: '#764ba2',
-    likes: 125000,
-    liked: false
+  id: 1,
+  username: "@madanrathore_fanclub",
+  description:
+    "Uploaded by Madan Rathore Fan Club 🔥 #madanrathore #fanclub #viral",
+  audioTitle: "Original Audio - Madan Rathore Fan Club",
+  videoUrl: "your-video.mp4",
+  avatarColor1: "#667eea",
+  avatarColor2: "#764ba2",
+  likes: 2500,
+  liked: false,
 };
 
 // Initialize on page load
-window.addEventListener('load', () => {
-    loadReels();
+window.addEventListener("load", () => {
+  loadReels();
 });
 
 // Load all reels
 function loadReels() {
-    // Get uploaded reels from localStorage
-    let uploadedReels = [];
-    try {
-        uploadedReels = JSON.parse(localStorage.getItem('uploadedReels')) || [];
-    } catch (error) {
-        console.error('Error loading reels from storage:', error);
-    }
+  // Get uploaded reels from localStorage
+  let uploadedReels = [];
+  try {
+    uploadedReels = JSON.parse(localStorage.getItem("uploadedReels")) || [];
+  } catch (error) {
+    console.error("Error loading reels from storage:", error);
+  }
 
-    // Combine default reel with uploaded reels
-    const allReels = [defaultReel, ...uploadedReels];
+  // Combine default reel with uploaded reels
+  const allReels = [defaultReel, ...uploadedReels];
 
-    // Clear container
-    reelsContainer.innerHTML = '';
+  // Clear container
+  reelsContainer.innerHTML = "";
 
-    // Create reel elements
-    allReels.forEach((reel, index) => {
-        const reelElement = createReelElement(reel, index);
-        reelsContainer.appendChild(reelElement);
-    });
+  // Create reel elements
+  allReels.forEach((reel, index) => {
+    const reelElement = createReelElement(reel, index);
+    reelsContainer.appendChild(reelElement);
+  });
 }
 
 // Create individual reel element
 function createReelElement(reel, index) {
-    const reelDiv = document.createElement('div');
-    reelDiv.className = 'reel';
-    reelDiv.id = `reel-${reel.id}`;
+  const reelDiv = document.createElement("div");
+  reelDiv.className = "reel";
+  reelDiv.id = `reel-${reel.id}`;
 
-    // Avatar gradient style
-    const avatarGradient = `linear-gradient(135deg, ${reel.avatarColor1} 0%, ${reel.avatarColor2} 100%)`;
+  // Avatar gradient style
+  const avatarGradient = `linear-gradient(135deg, ${reel.avatarColor1} 0%, ${reel.avatarColor2} 100%)`;
 
-    reelDiv.innerHTML = `
+  reelDiv.innerHTML = `
         <div class="reel-video">
             <video class="video-player" playsinline loop muted>
                 <source src="${reel.videoUrl}" type="video/mp4" />
@@ -117,119 +118,127 @@ function createReelElement(reel, index) {
         </div>
     `;
 
-    // Add event listeners after creating the element
-    setTimeout(() => {
-        addReelEventListeners(reelDiv, reel, index);
-    }, 0);
+  // Add event listeners after creating the element
+  setTimeout(() => {
+    addReelEventListeners(reelDiv, reel, index);
+  }, 0);
 
-    return reelDiv;
+  return reelDiv;
 }
 
 // Add event listeners to reel
 function addReelEventListeners(reelElement, reel, index) {
-    const video = reelElement.querySelector('.video-player');
-    const likeBtn = reelElement.querySelector('.like-btn');
-    const followBtn = reelElement.querySelector('.follow-btn');
+  const video = reelElement.querySelector(".video-player");
+  const likeBtn = reelElement.querySelector(".like-btn");
+  const followBtn = reelElement.querySelector(".follow-btn");
 
-    // Video controls
-    video.addEventListener('click', () => {
-        if (video.paused) {
-            video.play();
-        } else {
-            video.pause();
-        }
-    });
-
-    // Auto play first video
-    if (index === 0) {
-        video.play().catch(err => console.log('Autoplay prevented:', err));
+  // Video controls
+  video.addEventListener("click", () => {
+    if (video.paused) {
+      video.play();
+    } else {
+      video.pause();
     }
+  });
 
-    // Like button
-    likeBtn.addEventListener('click', () => {
-        toggleLike(likeBtn, reel);
-    });
+  // Auto play first video
+  if (index === 0) {
+    video.play().catch((err) => console.log("Autoplay prevented:", err));
+  }
 
-    // Follow button
-    followBtn.addEventListener('click', () => {
-        followBtn.textContent = followBtn.textContent === 'Follow' ? 'Following' : 'Follow';
-        followBtn.style.backgroundColor = followBtn.textContent === 'Following' ? '#fff' : 'transparent';
-        followBtn.style.color = followBtn.textContent === 'Following' ? '#000' : '#fff';
-    });
+  // Like button
+  likeBtn.addEventListener("click", () => {
+    toggleLike(likeBtn, reel);
+  });
 
-    // Intersection Observer for video autoplay
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                video.play().catch(err => console.log('Autoplay prevented:', err));
-            } else {
-                video.pause();
-            }
-        });
-    }, { threshold: 0.5 });
+  // Follow button
+  followBtn.addEventListener("click", () => {
+    followBtn.textContent =
+      followBtn.textContent === "Follow" ? "Following" : "Follow";
+    followBtn.style.backgroundColor =
+      followBtn.textContent === "Following" ? "#fff" : "transparent";
+    followBtn.style.color =
+      followBtn.textContent === "Following" ? "#000" : "#fff";
+  });
 
-    observer.observe(reelElement);
+  // Intersection Observer for video autoplay
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          video.play().catch((err) => console.log("Autoplay prevented:", err));
+        } else {
+          video.pause();
+        }
+      });
+    },
+    { threshold: 0.5 },
+  );
+
+  observer.observe(reelElement);
 }
 
 // Toggle like
 function toggleLike(likeBtn, reel) {
-    const likeCountSpan = likeBtn.querySelector('.like-count');
-    const icon = likeBtn.querySelector('svg');
-    const isLiked = likeBtn.classList.contains('liked');
+  const likeCountSpan = likeBtn.querySelector(".like-count");
+  const icon = likeBtn.querySelector("svg");
+  const isLiked = likeBtn.classList.contains("liked");
 
-    if (!isLiked) {
-        reel.likes++;
-        likeBtn.classList.add('liked');
-        icon.innerHTML = '<path fill="red" stroke="red" d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>';
-        
-        // Animation
-        likeBtn.style.transform = 'scale(1.2)';
-        setTimeout(() => {
-            likeBtn.style.transform = 'scale(1)';
-        }, 200);
-    } else {
-        reel.likes--;
-        likeBtn.classList.remove('liked');
-        icon.innerHTML = '<path fill="none" stroke="currentColor" d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>';
-        
-        // Animation
-        likeBtn.style.transform = 'scale(0.9)';
-        setTimeout(() => {
-            likeBtn.style.transform = 'scale(1)';
-        }, 200);
-    }
+  if (!isLiked) {
+    reel.likes++;
+    likeBtn.classList.add("liked");
+    icon.innerHTML =
+      '<path fill="red" stroke="red" d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>';
 
-    likeCountSpan.textContent = formatCount(reel.likes);
+    // Animation
+    likeBtn.style.transform = "scale(1.2)";
+    setTimeout(() => {
+      likeBtn.style.transform = "scale(1)";
+    }, 200);
+  } else {
+    reel.likes--;
+    likeBtn.classList.remove("liked");
+    icon.innerHTML =
+      '<path fill="none" stroke="currentColor" d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>';
 
-    // Save to localStorage if it's an uploaded reel
-    if (reel.id !== 1) {
-        updateReelInStorage(reel);
-    }
+    // Animation
+    likeBtn.style.transform = "scale(0.9)";
+    setTimeout(() => {
+      likeBtn.style.transform = "scale(1)";
+    }, 200);
+  }
+
+  likeCountSpan.textContent = formatCount(reel.likes);
+
+  // Save to localStorage if it's an uploaded reel
+  if (reel.id !== 1) {
+    updateReelInStorage(reel);
+  }
 }
 
 // Update reel in localStorage
 function updateReelInStorage(reel) {
-    try {
-        let reels = JSON.parse(localStorage.getItem('uploadedReels')) || [];
-        const reelIndex = reels.findIndex(r => r.id === reel.id);
-        if (reelIndex !== -1) {
-            reels[reelIndex].likes = reel.likes;
-            localStorage.setItem('uploadedReels', JSON.stringify(reels));
-        }
-    } catch (error) {
-        console.error('Error updating reel:', error);
+  try {
+    let reels = JSON.parse(localStorage.getItem("uploadedReels")) || [];
+    const reelIndex = reels.findIndex((r) => r.id === reel.id);
+    if (reelIndex !== -1) {
+      reels[reelIndex].likes = reel.likes;
+      localStorage.setItem("uploadedReels", JSON.stringify(reels));
     }
+  } catch (error) {
+    console.error("Error updating reel:", error);
+  }
 }
 
 // Format count with K suffix
 function formatCount(count) {
-    if (count >= 1000) {
-        return (count / 1000).toFixed(1).replace(/\.0$/, '') + 'K';
-    }
-    return count.toString();
+  if (count >= 1000) {
+    return (count / 1000).toFixed(1).replace(/\.0$/, "") + "K";
+  }
+  return count.toString();
 }
 
 // Home button
-homeBtn.addEventListener('click', () => {
-    reelsContainer.scrollTo({ top: 0, behavior: 'smooth' });
+homeBtn.addEventListener("click", () => {
+  reelsContainer.scrollTo({ top: 0, behavior: "smooth" });
 });
