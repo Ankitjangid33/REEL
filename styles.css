@@ -46,12 +46,62 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+    position: relative;
 }
 
 .video-player {
     width: 100%;
     height: 100%;
     object-fit: cover;
+}
+
+/* Video Controls Overlay */
+.video-controls-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(0, 0, 0, 0.2);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+    z-index: 10;
+}
+
+.play-pause-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+    pointer-events: all;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.play-pause-btn:hover {
+    background-color: rgba(255, 255, 255, 0.4);
+    transform: scale(1.1);
+}
+
+.play-pause-btn:active {
+    transform: scale(0.95);
+}
+
+.play-pause-btn svg {
+    width: 32px;
+    height: 32px;
+    margin-left: 2px;
 }
 
 .video-placeholder {
@@ -77,6 +127,7 @@ body {
     padding: 12px;
     padding-bottom: 80px; /* Space for bottom nav on mobile */
     pointer-events: none;
+    z-index: 5;
 }
 
 .reel-overlay > * {
@@ -328,6 +379,16 @@ body {
         width: 20px;
         height: 20px;
     }
+
+    .play-pause-btn {
+        width: 50px;
+        height: 50px;
+    }
+
+    .play-pause-btn svg {
+        width: 26px;
+        height: 26px;
+    }
 }
 
 /* Medium Mobile Devices (361px - 480px) */
@@ -409,6 +470,16 @@ body {
         width: 24px;
         height: 24px;
     }
+
+    .play-pause-btn {
+        width: 65px;
+        height: 65px;
+    }
+
+    .play-pause-btn svg {
+        width: 34px;
+        height: 34px;
+    }
 }
 
 /* Tablet Styles */
@@ -479,6 +550,16 @@ body {
     .audio-thumbnail {
         width: 50px;
         height: 50px;
+    }
+
+    .play-pause-btn {
+        width: 70px;
+        height: 70px;
+    }
+
+    .play-pause-btn svg {
+        width: 36px;
+        height: 36px;
     }
 }
 
@@ -560,6 +641,16 @@ body {
         width: 28px;
         height: 28px;
     }
+
+    .play-pause-btn {
+        width: 75px;
+        height: 75px;
+    }
+
+    .play-pause-btn svg {
+        width: 40px;
+        height: 40px;
+    }
 }
 
 /* Large Desktop */
@@ -621,6 +712,14 @@ body {
     .action-btn:active {
         transform: none;
     }
+
+    .video-controls-overlay {
+        transition: none;
+    }
+
+    .play-pause-btn {
+        transition: none;
+    }
 }
 
 /* Dark Mode Enhancement */
@@ -633,7 +732,8 @@ body {
 /* Print Styles */
 @media print {
     .bottom-nav,
-    .reel-actions {
+    .reel-actions,
+    .video-controls-overlay {
         display: none;
     }
 }
