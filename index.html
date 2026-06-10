@@ -16,7 +16,7 @@
       <!-- Reel 1 -->
       <div class="reel">
         <div class="reel-video">
-          <video id="reel-video" class="video-player" playsinline loop muted>
+          <video id="reel-video" class="video-player" playsinline loop>
             <source src="video-viral.mp4" type="video/mp4" />
             Your browser does not support the video tag.
           </video>
@@ -101,17 +101,17 @@
               <span>Share</span>
             </button>
 
-            <button class="action-btn">
+            <button class="action-btn" id="sound-btn">
               <svg
                 viewBox="0 0 24 24"
                 fill="none"
                 stroke="currentColor"
                 stroke-width="2"
               >
-                <circle cx="12" cy="12" r="1" />
-                <circle cx="12" cy="5" r="1" />
-                <circle cx="12" cy="19" r="1" />
+                <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+                <path d="M15.54 3.54a9 9 0 0 1 0 12.72M19.07 4.93a15 15 0 0 1 0 14.14"></path>
               </svg>
+              <span>Sound</span>
             </button>
 
             <div
@@ -197,6 +197,7 @@
       // Like functionality with localStorage persistence
       const likeBtn = document.getElementById("like-btn");
       const likeCountSpan = document.getElementById("like-count");
+      const soundBtn = document.getElementById("sound-btn");
 
       // Initial like count
       const INITIAL_LIKES = 125000;
@@ -205,6 +206,9 @@
       let hasLiked = localStorage.getItem("hasLiked") === "true";
       let currentLikes =
         parseInt(localStorage.getItem("likeCount")) || INITIAL_LIKES;
+
+      // Sound state
+      let isMuted = localStorage.getItem("videoMuted") === "true";
 
       // Format number with K suffix
       function formatCount(count) {
@@ -226,16 +230,30 @@
         }
       }
 
+      // Update sound UI
+      function updateSoundUI() {
+        if (isMuted) {
+          soundBtn.style.opacity = "0.5";
+          soundBtn.querySelector("span").textContent = "Muted";
+        } else {
+          soundBtn.style.opacity = "1";
+          soundBtn.querySelector("span").textContent = "Sound";
+        }
+      }
+
       // Initialize on page load
       updateLikeUI();
+      updateSoundUI();
 
       // Video autoplay on load
       const video = document.getElementById("reel-video");
 
+      // Set initial mute state
+      video.muted = isMuted;
+
       // Play video when page loads
       video.play().catch((err) => {
         console.log("Autoplay prevented:", err);
-        // If autoplay fails, unmute and try again on user interaction
       });
 
       // Toggle play/pause on video click
@@ -245,6 +263,15 @@
         } else {
           video.pause();
         }
+      });
+
+      // Sound button click handler
+      soundBtn.addEventListener("click", function (e) {
+        e.stopPropagation();
+        isMuted = !isMuted;
+        video.muted = isMuted;
+        localStorage.setItem("videoMuted", isMuted ? "true" : "false");
+        updateSoundUI();
       });
 
       // Like button click handler
