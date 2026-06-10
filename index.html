@@ -1,0 +1,296 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover"
+    />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <title>Instagram Reels</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="reels-container">
+      <!-- Reel 1 -->
+      <div class="reel">
+        <div class="reel-video">
+          <video id="reel-video" class="video-player" playsinline loop muted>
+            <source src="your-video.mp4" type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
+        </div>
+
+        <div class="reel-overlay">
+          <div class="reel-info">
+            <div class="user-info">
+              <div
+                class="user-avatar"
+                style="
+                  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                  font-size: 18px;
+                  font-weight: bold;
+                "
+              >
+                MR
+              </div>
+              <span class="username">@madanrathore_fanclub</span>
+              <button class="follow-btn">Follow</button>
+            </div>
+            <p class="reel-description">
+              Uploaded by Madan Rathore Fan Club 🔥 #madanrathore #fanclub
+              #viral
+            </p>
+            <div class="audio-info">
+              <svg class="music-icon" viewBox="0 0 24 24" fill="currentColor">
+                <path
+                  d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"
+                />
+              </svg>
+              <span class="audio-text"
+                >Original Audio - Madan Rathore Fan Club</span
+              >
+            </div>
+          </div>
+
+          <div class="reel-actions">
+            <button class="action-btn" id="like-btn">
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path
+                  d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"
+                />
+              </svg>
+              <span id="like-count">125000</span>
+            </button>
+
+            <button
+              class="action-btn"
+              style="opacity: 0.5; cursor: not-allowed"
+            >
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path
+                  d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"
+                />
+              </svg>
+              <span>Off</span>
+            </button>
+
+            <button class="action-btn">
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z" />
+              </svg>
+              <span>Share</span>
+            </button>
+
+            <button class="action-btn">
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <circle cx="12" cy="12" r="1" />
+                <circle cx="12" cy="5" r="1" />
+                <circle cx="12" cy="19" r="1" />
+              </svg>
+            </button>
+
+            <div
+              class="audio-thumbnail"
+              style="
+                background: linear-gradient(45deg, #f093fb 0%, #f5576c 100%);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+              "
+            >
+              <svg
+                viewBox="0 0 24 24"
+                fill="white"
+                style="width: 20px; height: 20px"
+              >
+                <path
+                  d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"
+                />
+              </svg>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom Navigation -->
+    <nav class="bottom-nav">
+      <button class="nav-btn">
+        <svg
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+        >
+          <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+        </svg>
+      </button>
+      <button class="nav-btn">
+        <svg
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+        >
+          <circle cx="11" cy="11" r="8" />
+          <path d="m21 21-4.35-4.35" />
+        </svg>
+      </button>
+      <button class="nav-btn active">
+        <svg viewBox="0 0 24 24" fill="currentColor">
+          <path
+            d="M4 3h16a1 1 0 0 1 1 1v16a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm1 2v14h14V5H5zm2 2h10v2H7V7zm0 4h10v2H7v-2zm0 4h7v2H7v-2z"
+          />
+        </svg>
+      </button>
+      <button class="nav-btn">
+        <svg
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+        >
+          <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+          <circle cx="8.5" cy="7" r="4" />
+          <path d="M20 8v6M23 11h-6" />
+        </svg>
+      </button>
+      <button class="nav-btn">
+        <svg
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+        >
+          <circle cx="12" cy="12" r="10" />
+          <circle cx="12" cy="12" r="3" />
+        </svg>
+      </button>
+    </nav>
+
+    <script>
+      // Like functionality with localStorage persistence
+      const likeBtn = document.getElementById("like-btn");
+      const likeCountSpan = document.getElementById("like-count");
+
+      // Initial like count
+      const INITIAL_LIKES = 125000;
+
+      // Check if user has already liked (persists across browser sessions)
+      let hasLiked = localStorage.getItem("hasLiked") === "true";
+      let currentLikes =
+        parseInt(localStorage.getItem("likeCount")) || INITIAL_LIKES;
+
+      // Format number with K suffix
+      function formatCount(count) {
+        if (count >= 1000) {
+          return (count / 1000).toFixed(1).replace(/\.0$/, "") + "K";
+        }
+        return count.toString();
+      }
+
+      // Update UI
+      function updateLikeUI() {
+        likeCountSpan.textContent = formatCount(currentLikes);
+
+        if (hasLiked) {
+          // Liked state - filled heart
+          likeBtn.querySelector("svg").innerHTML =
+            '<path fill="red" stroke="red" d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>';
+          likeBtn.classList.add("liked");
+        }
+      }
+
+      // Initialize on page load
+      updateLikeUI();
+
+      // Video autoplay on load
+      const video = document.getElementById("reel-video");
+
+      // Play video when page loads
+      video.play().catch((err) => {
+        console.log("Autoplay prevented:", err);
+        // If autoplay fails, unmute and try again on user interaction
+      });
+
+      // Toggle play/pause on video click
+      video.addEventListener("click", function () {
+        if (video.paused) {
+          video.play();
+        } else {
+          video.pause();
+        }
+      });
+
+      // Like button click handler
+      likeBtn.addEventListener("click", function () {
+        if (!hasLiked) {
+          // Like the video
+          hasLiked = true;
+          currentLikes++;
+
+          // Save to localStorage (persists even after closing browser)
+          localStorage.setItem("hasLiked", "true");
+          localStorage.setItem("likeCount", currentLikes.toString());
+
+          // Update UI with filled heart
+          likeBtn.querySelector("svg").innerHTML =
+            '<path fill="red" stroke="red" d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>';
+          likeBtn.classList.add("liked");
+          likeCountSpan.textContent = formatCount(currentLikes);
+
+          // Add animation
+          likeBtn.style.transform = "scale(1.2)";
+          setTimeout(() => {
+            likeBtn.style.transform = "scale(1)";
+          }, 200);
+        } else {
+          // Unlike the video (remove only their own like)
+          hasLiked = false;
+          currentLikes--;
+
+          // Update localStorage
+          localStorage.setItem("hasLiked", "false");
+          localStorage.setItem("likeCount", currentLikes.toString());
+
+          // Update UI with empty heart
+          likeBtn.querySelector("svg").innerHTML =
+            '<path fill="none" stroke="currentColor" d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>';
+          likeBtn.classList.remove("liked");
+          likeCountSpan.textContent = formatCount(currentLikes);
+
+          // Add animation
+          likeBtn.style.transform = "scale(0.9)";
+          setTimeout(() => {
+            likeBtn.style.transform = "scale(1)";
+          }, 200);
+        }
+      });
+    </script>
+  </body>
+</html>
